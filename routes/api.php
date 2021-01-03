@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ use App\Http\Controllers\AuthController;
 //     ]);
 // });
 
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
   Route::post('register', [AuthController::class, 'register']);
   Route::post('login', [AuthController::class, 'login']);
   Route::post('forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
@@ -33,3 +34,21 @@ Route::middleware('guest')->group(function() {
 });
 
 Route::middleware(['auth:sanctum', 'signed'])->get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
+
+Route::prefix('levels')->group(function () {
+  Route::post('/', [ExamController::class, 'createLevels']);
+  Route::put('/{id}', [ExamController::class, 'updateLevels']);
+  Route::delete('/{id}', [ExamController::class, 'deleteLevels']);
+});
+
+Route::prefix('case-studies')->group(function () {
+  Route::post('/', [ExamController::class, 'createCaseStudies']);
+  Route::put('/{id}', [ExamController::class, 'updateCaseStudies']);
+  Route::delete('/{id}', [ExamController::class, 'deleteCaseStudies']);
+});
+
+Route::prefix('questions')->group(function () {
+  Route::post('/', [ExamController::class, 'createQuestions']);
+  Route::put('/{id}', [ExamController::class, 'updateQuestions']);
+  Route::delete('/{id}', [ExamController::class, 'deleteQuestions']);
+});
