@@ -15,12 +15,12 @@ class CreateChecklistsTable extends Migration
     {
         Schema::create('checklists', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('question_id');
+            $table->uuid('question_id')->nullable();
             $table->text('body');
             $table->unsignedTinyInteger('answer')->nullable();
             $table->timestamps();
             $table->primary('id');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

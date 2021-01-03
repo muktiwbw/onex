@@ -15,13 +15,13 @@ class CreateChoicesTable extends Migration
     {
         Schema::create('choices', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('question_id');
+            $table->uuid('question_id')->nullable();
             $table->string('point', 1);
             $table->string('body');
             $table->boolean('isCorrect')->default(false);
             $table->timestamps();
             $table->primary('id');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

@@ -15,6 +15,7 @@ class CreateLevelsTable extends Migration
     {
         Schema::create('levels', function (Blueprint $table) {
             $table->uuid('id')->unique();
+            $table->string('name');
             $table->text('tujuan')->nullable();
             $table->longText('uraian')->nullable();
             $table->unsignedTinyInteger('examThreshold')->nullable();

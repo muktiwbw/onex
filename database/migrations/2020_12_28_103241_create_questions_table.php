@@ -15,8 +15,8 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('level_id');
-            $table->uuid('case_study_id');
+            $table->uuid('level_id')->nullable();
+            $table->uuid('case_study_id')->nullable();
             $table->unsignedTinyInteger('number');
             $table->text('body');
             $table->string('type')->default('MULTIPLE');
@@ -24,8 +24,8 @@ class CreateQuestionsTable extends Migration
             $table->unsignedTinyInteger('score')->nullable();
             $table->timestamps();
             $table->primary('id');
-            $table->foreign('level_id')->references('id')->on('levels');
-            $table->foreign('case_study_id')->references('id')->on('case_studies');
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            $table->foreign('case_study_id')->references('id')->on('case_studies')->onDelete('cascade');
         });
     }
 
