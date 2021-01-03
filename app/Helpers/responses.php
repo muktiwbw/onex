@@ -25,7 +25,7 @@ function res($msg = null, $pyld = null, $code = 200) {
 
   if ($pyld) $res['data'] = $pyld;
 
-  return $res;
+  return response()->json($res, $code);
 }
 
 function err($e) {

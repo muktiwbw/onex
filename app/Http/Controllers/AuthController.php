@@ -37,7 +37,7 @@ class AuthController extends Controller
         'access_token' => explode('|', $token->plainTextToken)[1]
       ];
 
-      return response()->json(res('User has been created.', $data, 201), 201);
+      return res('User has been created.', $data, 201);
     };
 
     return catcher($fn);
@@ -66,7 +66,7 @@ class AuthController extends Controller
           'access_token' => explode('|', $token->plainTextToken)[1]
         ];
 
-        return response()->json(res('Successfully logged in.', $data));
+        return res('Successfully logged in.', $data);
       }
 
       throw new \Exception("Invalid credentials.", 401);
@@ -81,7 +81,7 @@ class AuthController extends Controller
 
       $data = $request->user()->only('id', 'email', 'email_verified_at');
 
-      return response()->json(res('Successfully verify email.', $data));
+      return res('Successfully verify email.', $data);
     };
 
     return catcher($fn);
@@ -95,7 +95,7 @@ class AuthController extends Controller
       $status = Password::sendResetLink($email);
   
       if ($status === Password::RESET_LINK_SENT) {
-        return response()->json(res('Password reset link has been sent.'));
+        return res('Password reset link has been sent.');
       }
   
       throw new \Exception("Failed sending reset link.", 500);
@@ -118,7 +118,7 @@ class AuthController extends Controller
       });
   
       if ($status == Password::PASSWORD_RESET) {
-        return response()->json(res('Password has been reset.'));
+        return res('Password has been reset.');
       }
   
       throw new \Exception("Failed resetting password.", 500);
