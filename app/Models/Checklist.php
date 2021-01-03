@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Checklist extends Model
 {
-    use HasFactory;
-    
-    public $incrementing = false;
+  use HasFactory;
+  
+  public $incrementing = false;
+
+  protected $fillable = [
+    'id', 'question_id', 'body', 'answer'
+  ];
+
+  public function question () {
+    return $this->belongsTo(Question::class);
+  }
 }

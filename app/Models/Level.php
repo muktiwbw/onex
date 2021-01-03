@@ -10,4 +10,16 @@ class Level extends Model
     use HasFactory;
     
     public $incrementing = false;
+
+    protected $fillable = [
+        'id', 'name', 'tujuan', 'uraian', 'examThreshold', 'evaluationThreshold'
+    ];
+
+    public function caseStudies () {
+        return $this->hasMany(CaseStudy::class);
+    }
+
+    public function questions () {
+        return $this->hasMany(Question::class);
+    }
 }
