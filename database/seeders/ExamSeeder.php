@@ -67,10 +67,12 @@ class ExamSeeder extends Seeder
             }
           } elseif ($type === 'CHECKLIST') {
             // Running checklist factory
-            foreach (range(1, 6) as $checklist) {
+            foreach (range(1, 6) as $number) {
               \App\Models\Checklist::factory()
                                    ->for($question)
-                                   ->create();
+                                   ->create([
+                                     'number' => $number
+                                   ]);
             }
           }
         }
