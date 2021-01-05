@@ -15,14 +15,14 @@ class CreateCaseStudiesTable extends Migration
     {
         Schema::create('case_studies', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('level_id')->nullable();
+            // $table->uuid('level_id')->nullable();
             $table->unsignedTinyInteger('number');
             $table->text('title');
             $table->longText('body');
             $table->string('type')->default('TEXT');
             $table->timestamps();
             $table->primary('id');
-            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            // $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
         });
     }
 

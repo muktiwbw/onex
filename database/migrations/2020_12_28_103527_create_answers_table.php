@@ -17,7 +17,6 @@ class CreateAnswersTable extends Migration
             $table->uuid('id')->unique();
             $table->uuid('answer_sheet_id');
             $table->uuid('question_id');
-            $table->string('type');
             $table->string('point', 1)->nullable();
             $table->text('essay')->nullable();
             $table->json('checklist')->nullable();
