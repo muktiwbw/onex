@@ -4,27 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExamController;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-// Route::middleware('auth:sanctum')->get('/hello', function (Request $request) {
-//     return response()->json([
-//         'message' => 'Hello!'
-//     ]);
-// });
+use App\Http\Controllers\WorkingController;
 
 Route::middleware('guest')->group(function () {
   Route::post('register', [AuthController::class, 'register']);
@@ -35,20 +15,38 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth:sanctum', 'signed'])->get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
 
-Route::prefix('levels')->group(function () {
+Route::prefix('levels')->middleware('auth:sanctum')->group(function () {
   Route::post('/', [ExamController::class, 'createLevels']);
-  Route::put('/{id}', [ExamController::class, 'updateLevels']);
-  Route::delete('/{id}', [ExamController::class, 'deleteLevels']);
+  Route::put('/{level_id}', [ExamController::class, 'updateLevels']);
+  Route::delete('/{level_id}', [ExamController::class, 'deleteLevels']);
+  // Route::get('/', [ExamController::class, 'allLevels']);
+  // Route::get('/{id}', [ExamController::class, 'showLevels']);
+
+  Route::prefix('{level_id}/questions')->group(function () {
+    Route::get('/', [ExamController::class, 'allQuestions']);
+    Route::post('/', [ExamController::class, 'createQuestions']);
+    Route::get('/{question_id}', [ExamController::class, 'showQuestions']);
+    Route::put('/{question_id}', [ExamController::class, 'updateQuestions']);
+    Route::delete('/{question_id}', [ExamController::class, 'deleteQuestions']);
+  });
+  
+  Route::prefix('{level_id}/answer-sheets')->group(function () {
+    Route::post('/', [WorkingController::class, 'createAnswerSheets']);
+    Route::patch('/{answer_sheet_id}', [WorkingController::class, 'finishAnswerSheets']);
+
+    Route::prefix('{answer_sheet_id}/questions')->group(function () {
+      Route::get('/', [WorkingController::class, 'allQuestions']);
+      Route::get('/{question_id}', [WorkingController::class, 'showQuestions']);
+
+      Route::prefix('{question_id}/answers')->group(function () {
+        Route::post('/', [WorkingController::class, 'submitAnswers']);
+      });
+    });
+  });
 });
 
-Route::prefix('case-studies')->group(function () {
-  Route::post('/', [ExamController::class, 'createCaseStudies']);
-  Route::put('/{id}', [ExamController::class, 'updateCaseStudies']);
-  Route::delete('/{id}', [ExamController::class, 'deleteCaseStudies']);
-});
-
-Route::prefix('questions')->group(function () {
-  Route::post('/', [ExamController::class, 'createQuestions']);
-  Route::put('/{id}', [ExamController::class, 'updateQuestions']);
-  Route::delete('/{id}', [ExamController::class, 'deleteQuestions']);
-});
+// Route::prefix('case-studies')->group(function () {
+//   Route::post('/', [ExamController::class, 'createCaseStudies']);
+//   Route::put('/{case_study_id}', [ExamController::class, 'updateCaseStudies']);
+//   Route::delete('/{case_study_id}', [ExamController::class, 'deleteCaseStudies']);
+// });
