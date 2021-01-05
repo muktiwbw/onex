@@ -32,9 +32,9 @@ function err($e) {
   $message = 'Unexpected error.';
 
   switch ($e->getCode()) {
-    case 23000:
-      $message = 'Error for duplicate value.';
-      break;
+    // case 23000:
+    //   $message = 'Error for duplicate value.';
+    //   break;
 
     // Add more...
 
