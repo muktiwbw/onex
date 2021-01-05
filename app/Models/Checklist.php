@@ -12,7 +12,7 @@ class Checklist extends Model
   public $incrementing = false;
 
   protected $fillable = [
-    'id', 'question_id', 'body', 'answer'
+    'id', 'question_id', 'number', 'body', 'answer'
   ];
 
   public function question () {

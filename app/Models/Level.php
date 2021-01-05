@@ -15,11 +15,15 @@ class Level extends Model
         'id', 'name', 'tujuan', 'uraian', 'examThreshold', 'evaluationThreshold'
     ];
 
-    public function caseStudies () {
-        return $this->hasMany(CaseStudy::class);
-    }
+    // public function caseStudies () {
+    //     return $this->hasMany(CaseStudy::class);
+    // }
 
     public function questions () {
         return $this->hasMany(Question::class);
+    }
+
+    public function answerSheets () {
+        return $this->hasMany(AnswerSheet::class);
     }
 }

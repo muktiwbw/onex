@@ -23,11 +23,15 @@ class Question extends Model
     return $this->belongsTo(CaseStudy::class);
   }
 
-  public function choices() {
+  public function choices () {
     return $this->hasMany(Choice::class);
   }
 
-  public function checklists() {
+  public function checklists () {
     return $this->hasMany(Checklist::class);
+  }
+
+  public function answers () {
+    return $this->hasMany(Answer::class);
   }
 }

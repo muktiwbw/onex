@@ -12,12 +12,12 @@ class CaseStudy extends Model
   public $incrementing = false;
 
   protected $fillable = [
-    'id', 'level_id', 'number', 'title', 'body', 'type'
+    'id', 'number', 'title', 'body', 'type'
   ];
 
-  public function level () {
-    return $this->belongsTo(Level::class);
-  }
+  // public function level () {
+  //   return $this->belongsTo(Level::class);
+  // }
 
   public function questions () {
     return $this->hasMany(Question::class);
