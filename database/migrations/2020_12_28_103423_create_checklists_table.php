@@ -16,6 +16,7 @@ class CreateChecklistsTable extends Migration
         Schema::create('checklists', function (Blueprint $table) {
             $table->uuid('id')->unique();
             $table->uuid('question_id')->nullable();
+            $table->unsignedTinyInteger('number');
             $table->text('body');
             $table->unsignedTinyInteger('answer')->nullable();
             $table->timestamps();

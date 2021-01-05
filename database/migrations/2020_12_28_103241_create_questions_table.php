@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('level_id')->nullable();
+            $table->uuid('level_id');
             $table->uuid('case_study_id')->nullable();
             $table->unsignedTinyInteger('number');
             $table->text('body');
