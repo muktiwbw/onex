@@ -26,7 +26,7 @@ class WorkingSeeder extends Seeder
 
     // Initiate possible answers for multiple choice and checklist
     $points = range('a', 'e');
-    $answer = array_merge(range(1, 5), [null]);
+    $answer = array_merge(range(0, 5), [null]);
 
     foreach ($levels as $level) {
       foreach ($users as $user) {

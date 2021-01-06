@@ -23,7 +23,7 @@ class ChecklistFactory extends Factory
      */
     public function definition()
     {
-        $answers = array_merge(range(1, 5), [null]);
+        $answers = array_merge(range(0, 5));
 
         return [
             'id' => Str::uuid(),
