@@ -16,6 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->uuid('id')->unique();
             $table->uuid('answer_sheet_id');
+            $table->json('examData')->nullable();
             $table->unsignedTinyInteger('score')->nullable();
             $table->timestamps();
             $table->primary('id');

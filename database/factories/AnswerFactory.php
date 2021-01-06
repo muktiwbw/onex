@@ -2,19 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Checklist;
+use App\Models\Answer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 
-class ChecklistFactory extends Factory
+class AnswerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Checklist::class;
+    protected $model = Answer::class;
 
     /**
      * Define the model's default state.
@@ -23,12 +22,9 @@ class ChecklistFactory extends Factory
      */
     public function definition()
     {
-        $answers = array_merge(range(0, 5));
-
         return [
             'id' => Str::uuid(),
-            'body' => $this->faker->sentence(4),
-            'answer' => Arr::random($answers)
+            'essay' => $this->faker->paragraph(3)
         ];
     }
 }
