@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::get('/{answer_sheet_id}', [AssessmentController::class, 'showAnswerSheets']);
   
       Route::prefix('{answer_sheet_id}/reports')->group(function () {
-        Route::post('/', [AssessmentController::class, 'createReports']);
+        Route::post('/', [AssessmentController::class, 'submitReports']);
       });
     });
   });
